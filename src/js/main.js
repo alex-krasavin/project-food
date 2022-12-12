@@ -97,6 +97,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 
     function toggleHide () {
         modal.classList.toggle("hide")
+        clearTimeout(modalTimerId) // Если пользователь открыл модальное окно сам не показывеам его через время
     }
 
     btnModal.forEach(button => {
@@ -126,6 +127,20 @@ window.addEventListener("DOMContentLoaded",()=>{
             toggleHide();
         }
     });
+
+    //Show a modal window after time or at the end of the page
+
+    const modalTimerId = setTimeout(toggleHide,5000);
+    
+    function showModalByScroll () {
+          //Сколько проскролена страница по высоте + высота видимого контента >= полной высоте страницы
+        if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight -1) {
+            toggleHide();
+        }
+        window.removeEventListener("scroll",showModalByScroll)
+    }
+
+    window.addEventListener("scroll",showModalByScroll);
 });
 
 
