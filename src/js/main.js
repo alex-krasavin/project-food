@@ -89,6 +89,43 @@ window.addEventListener("DOMContentLoaded",()=>{
 
     setClock(".timer",deadline)
     
+    //!!!!!!!!!! Modal window !!!!!!!!!!
+
+    const btnModal = document.querySelectorAll("[data-modal]"),
+          modalClose = document.querySelector("[data-close]"),
+          modal = document.querySelector(".modal");
+
+    function toggleHide () {
+        modal.classList.toggle("hide")
+    }
+
+    btnModal.forEach(button => {
+        button.addEventListener("click", toggleHide)
+            // modal.classList.add("show")
+            // modal.classList.remove("hide")
+           
+        
+    })
+
+    modalClose.addEventListener("click",toggleHide)
+        // modal.classList.add("hide");
+        // modal.classList.remove("show")
+        
+   
+
+    modal.addEventListener("click",(e)=>{
+        if(e.target.classList == "modal" || e.keyCode === 27) {
+           toggleHide();
+        }
+    })
+
+    //close modal for keypress esc
+
+    document.addEventListener("keydown",(e)=>{
+        if(e.code === "Escape" && modal.classList == "modal") {
+            toggleHide();
+        }
+    });
 });
 
 
